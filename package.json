@@ -15,5 +15,9 @@
     "zipcode"
   ],
   "author": "Nebojša Jakovljević <nebojsa@nebjak.net>",
-  "license": "MIT License"
+  "license": "MIT License",
+  "devDependencies": {
+    "chai": "*",
+    "mocha": "*"
+  }
 }
