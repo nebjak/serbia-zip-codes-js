@@ -4,7 +4,7 @@
   "description": "Easy access to Serbia zip codes. You can search zip code by city, or city by zip code.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",

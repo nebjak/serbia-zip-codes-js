@@ -2,6 +2,9 @@
 
 Easy access to Serbia zip codes. You can search zip code by city, or city by zip code.
 
+
+[![Build Status][travis-image]][travis-url]
+
 ## Installation
 
 
@@ -61,3 +64,6 @@ console.log(result)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create a new Pull Request
+
+[travis-image]: https://travis-ci.org/nebjak/serbia-zip-codes-js.svg
+[travis-url]: https://travis-ci.org/nebjak/serbia-zip-codes-js
