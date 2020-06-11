@@ -79,3 +79,33 @@ describe('serbia_zip_codes', function () {
     });
   });
 });
+
+describe('#findByCity()', () => {
+  it('for param "Loznica" should return array', async () => {
+    try {
+      const result = await zip.findByCity('Loznica');
+      expect(result).to.be.a('array');
+    } catch (error) {}
+  });
+
+  it('for param "Loznica" should return expected value', () => {
+    zip.findByCity('Loznica').then((result) => {
+      expect(result[0].zip_code).to.be.equal('15300');
+    });
+  });
+
+  it('for empty param should reject', async () => {
+    try {
+      const result = await zip.findByCity();
+      expect(result).to.be.undefined;
+    } catch (error) {
+      expect(error).to.be.instanceOf(Error);
+    }
+  });
+
+  it('for param "Beo" should have size 10', () => {
+    zip.findByCity('beo').then((result) => {
+      expect(result).to.have.length(10);
+    });
+  });
+});

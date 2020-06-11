@@ -36,6 +36,19 @@ function findByZipSync(zip) {
 }
 
 /**
+ * Search by city name
+ * @param {string} city
+ * @returns {Promise<{city: string, zip_code: string}[] | Error>}
+ */
+function findByCity(city) {
+  return new Promise((resolve, reject) => {
+    if (!city) reject(new Error('Function parameter missing!'));
+    const result = findByCitySync(city);
+    resolve(result);
+  });
+}
+
+/**
  * Search by zip code
  * @param {string | number} zip
  * @returns {Promise<{city: string, zip_code: string}[] | Error>}
@@ -52,5 +65,6 @@ module.exports = {
   getAllSync: getAllSync,
   findByCitySync: findByCitySync,
   findByZipSync: findByZipSync,
+  findByCity: findByCity,
   findByZip: findByZip,
 };
