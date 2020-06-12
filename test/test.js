@@ -1,48 +1,111 @@
-var expect = require('chai').expect
-var zip = require('../index')
+var expect = require('chai').expect;
+var zip = require('../index');
 
-describe('serbia_zip_codes', function() {
-  it('should respond to findByCity()', function() {
-    expect(zip).to.respondTo('findByCity')
-  })
+describe('serbia_zip_codes', function () {
+  it('should respond to findByCitySync()', function () {
+    expect(zip).to.respondTo('findByCitySync');
+  });
 
-  it('should respond to findByZip()', function() {
-    expect(zip).to.respondTo('findByZip')
-  })
+  it('should respond to findByZipSync()', function () {
+    expect(zip).to.respondTo('findByZipSync');
+  });
 
-  describe('#findByCity()', function() {
-    it('for param "Loznica" should return array', function() {
-      expect(zip.findByCity('Loznica')).to.be.a('array')
-    })
+  describe('#findByCitySync()', function () {
+    it('for param "Loznica" should return array', function () {
+      expect(zip.findByCitySync('Loznica')).to.be.a('array');
+    });
 
-    it('for param "Loznica" should return array of size 1', function() {
-      expect(zip.findByCity('Loznica')).to.have.length(1)
-    })
+    it('for param "Loznica" should return array of size 1', function () {
+      expect(zip.findByCitySync('Loznica')).to.have.length(1);
+    });
 
-    it('for param "Loznica" should return expected value', function() {
-      expect(zip.findByCity('Loznica')).to.eql([ { city: 'Loznica', zip_code: '15300' } ])
-    })
+    it('for param "Loznica" should return expected value', function () {
+      expect(zip.findByCitySync('Loznica')).to.eql([
+        { city: 'Loznica', zip_code: '15300' },
+      ]);
+    });
 
-    it('for param "Beograd" should have size 9', function() {
-      expect(zip.findByCity('Beograd')).to.have.length(9)
-    })
+    it('for param "Beograd" should have size 9', function () {
+      expect(zip.findByCitySync('Beograd')).to.have.length(9);
+    });
 
-    it('should be case insensitive', function() {
-      expect(zip.findByCity('loznica')).to.eql(zip.findByCity('LOZNICA'))
-    })
-  })
+    it('should be case insensitive', function () {
+      expect(zip.findByCitySync('loznica')).to.eql(
+        zip.findByCitySync('LOZNICA')
+      );
+    });
+  });
 
-  describe('#findByZip()', function() {
-    it('for param "15300" should return array', function() {
-      expect(zip.findByZip("15300")).to.be.a("array")
-    })
+  describe('#findByZipSync()', function () {
+    it('for param "15300" should return array', function () {
+      expect(zip.findByZipSync('15300')).to.be.a('array');
+    });
 
-    it('for param "15300" should return array of size 1', function() {
-      expect(zip.findByZip("15300")).to.have.length(1)
-    })
+    it('for param "15300" should return array of size 1', function () {
+      expect(zip.findByZipSync('15300')).to.have.length(1);
+    });
 
-    it('for param "1530" should return array of size 9', function() {
-      expect(zip.findByZip("1530")).to.have.length(9)
-    })
-  })
-})
+    it('for param "1530" should return array of size 9', function () {
+      expect(zip.findByZipSync('1530')).to.have.length(9);
+    });
+  });
+
+  describe('#findByZip()', () => {
+    it('for param "15300" should return array', () => {
+      zip.findByZip(15300).then((result) => {
+        expect(result).to.be.a('array');
+      });
+    });
+
+    it('for param "1530" should return array of size 9', () => {
+      zip.findByZip(1530).then((result) => {
+        expect(result).to.have.length(9);
+      });
+    });
+
+    it('for param "15300" should return array of size 1', () => {
+      zip.findByZip(15300).then((result) => {
+        expect(result[0].city).to.be.equal('Loznica');
+      });
+    });
+
+    it('for empty param should reject', async () => {
+      try {
+        const result = await zip.findByZip();
+        expect(result).to.be.undefined;
+      } catch (error) {
+        expect(error).to.be.instanceOf(Error);
+      }
+    });
+  });
+});
+
+describe('#findByCity()', () => {
+  it('for param "Loznica" should return array', async () => {
+    try {
+      const result = await zip.findByCity('Loznica');
+      expect(result).to.be.a('array');
+    } catch (error) {}
+  });
+
+  it('for param "Loznica" should return expected value', () => {
+    zip.findByCity('Loznica').then((result) => {
+      expect(result[0].zip_code).to.be.equal('15300');
+    });
+  });
+
+  it('for empty param should reject', async () => {
+    try {
+      const result = await zip.findByCity();
+      expect(result).to.be.undefined;
+    } catch (error) {
+      expect(error).to.be.instanceOf(Error);
+    }
+  });
+
+  it('for param "Beo" should have size 10', () => {
+    zip.findByCity('beo').then((result) => {
+      expect(result).to.have.length(10);
+    });
+  });
+});

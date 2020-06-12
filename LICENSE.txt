@@ -1,4 +1,4 @@
-Copyright (c) 2014 Nebojša Jakovljević
+Copyright (c) 2020 Nebojša Jakovljević
 
 MIT License
 
