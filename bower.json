@@ -1,7 +1,7 @@
 {
   "name": "serbia-zip-codes",
   "main": "index.js",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "homepage": "https://github.com/nebjak/serbia-zip-codes-js",
   "authors": [
     "Nebojša Jakovljević <nebojsa@nebjak.net>"
@@ -9,7 +9,9 @@
   "description": "Easy access to Serbia zip codes. You can search zip code by city, or city by zip code.",
   "keywords": [
     "serbia",
-    "zipcode"
+    "zipcode",
+    "post",
+    "postcode"
   ],
   "license": "MIT",
   "ignore": [
