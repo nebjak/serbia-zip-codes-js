@@ -9,7 +9,7 @@ const data = JSON.parse(
  * Get all dataset
  * @returns {Array.<{city: string, zip_code: string}>}
  */
-function getAllSync() {
+function getAll() {
   return data;
 }
 
