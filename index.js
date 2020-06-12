@@ -62,7 +62,7 @@ function findByZip(zip) {
 }
 
 module.exports = {
-  getAllSync: getAllSync,
+  getAll: getAll,
   findByCitySync: findByCitySync,
   findByZipSync: findByZipSync,
   findByCity: findByCity,
