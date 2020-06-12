@@ -7,16 +7,16 @@ const data = JSON.parse(
 
 /**
  * Get all dataset
- * @returns {{city: string, zip_code: string}[]}
+ * @returns {Array.<{city: string, zip_code: string}>}
  */
-function getAllSync() {
+function getAll() {
   return data;
 }
 
 /**
  * Search by city name
  * @param {string} city
- * @returns {{city: string, zip_code: string}[]}
+ * @returns {Array.<{city: string, zip_code: string}>}
  */
 function findByCitySync(city) {
   return data.filter(function (d) {
@@ -27,7 +27,7 @@ function findByCitySync(city) {
 /**
  * Search by zip code
  * @param {string | number} zip
- * @returns {{city: string, zip_code: string}[]}
+ * @returns {Array.<{city: string, zip_code: string}>}
  */
 function findByZipSync(zip) {
   return data.filter(function (d) {
@@ -35,8 +35,36 @@ function findByZipSync(zip) {
   });
 }
 
+/**
+ * Search by city name
+ * @param {string} city
+ * @returns {Promise<Array.<{city: string, zip_code: string}> | Error>}
+ */
+function findByCity(city) {
+  return new Promise((resolve, reject) => {
+    if (!city) reject(new Error('Function parameter missing!'));
+    const result = findByCitySync(city);
+    resolve(result);
+  });
+}
+
+/**
+ * Search by zip code
+ * @param {string | number} zip
+ * @returns {Promise<Array.<{city: string, zip_code: string}> | Error>}
+ */
+function findByZip(zip) {
+  return new Promise((resolve, reject) => {
+    if (!zip) reject(new Error('Function parameter missing!'));
+    const result = findByZipSync(zip);
+    resolve(result);
+  });
+}
+
 module.exports = {
   getAllSync: getAllSync,
   findByCitySync: findByCitySync,
   findByZipSync: findByZipSync,
+  findByCity: findByCity,
+  findByZip: findByZip,
 };
